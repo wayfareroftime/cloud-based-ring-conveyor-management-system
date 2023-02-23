@@ -1,0 +1,789 @@
+[
+    {
+        "id": "35f1323c051b9716",
+        "type": "tab",
+        "label": "Control Conveyor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b4913853f193e7c9",
+        "type": "rpi-gpio out",
+        "z": "35f1323c051b9716",
+        "name": "Lock 0",
+        "pin": "12",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 930,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "95deca6570d1c774",
+        "type": "rpi-gpio out",
+        "z": "35f1323c051b9716",
+        "name": "Conveyor",
+        "pin": "26",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 940,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2069999cfbd0b476",
+        "type": "rpi-gpio out",
+        "z": "35f1323c051b9716",
+        "name": "Lock 1",
+        "pin": "16",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 930,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "079e6579e98c6b58",
+        "type": "rpi-gpio out",
+        "z": "35f1323c051b9716",
+        "name": "Lock 3",
+        "pin": "22",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 930,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "af9a2ed87ea9dbd6",
+        "type": "mqtt in",
+        "z": "35f1323c051b9716",
+        "name": "Command \"Switch Lock\"",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "0957617de82d36a4",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 160,
+        "wires": [
+            [
+                "7a75f9dea51d02c5"
+            ]
+        ]
+    },
+    {
+        "id": "baa2b238e2348ef0",
+        "type": "function",
+        "z": "35f1323c051b9716",
+        "name": "Command to Logical Value",
+        "func": "var command = msg.payload.params;\nif (command === \"open\")\nmsg.payload = 1;\nelse\nmsg.payload = 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 460,
+        "wires": [
+            [
+                "05b16ffb72629cfa",
+                "f2088f1274bae0d8"
+            ]
+        ]
+    },
+    {
+        "id": "b7cfce2d4c2fe132",
+        "type": "mqtt in",
+        "z": "35f1323c051b9716",
+        "name": "Command \"Run/Stop Conveyor\"",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "7d0ddbad1ea23174",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "535799559198a730"
+            ]
+        ]
+    },
+    {
+        "id": "0750f8982b43311e",
+        "type": "mqtt in",
+        "z": "35f1323c051b9716",
+        "name": "Command \"Switch Lock\"",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "54c9a2ce6ee3b8bb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 220,
+        "wires": [
+            [
+                "65de55502e7a7296"
+            ]
+        ]
+    },
+    {
+        "id": "5dfcaf73ec97a552",
+        "type": "mqtt in",
+        "z": "35f1323c051b9716",
+        "name": "Command \"Switch Lock\"",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "62adae58e3352ad0",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 340,
+        "wires": [
+            [
+                "b036052927208a12"
+            ]
+        ]
+    },
+    {
+        "id": "535799559198a730",
+        "type": "switch",
+        "z": "35f1323c051b9716",
+        "name": "Is Command Correct",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "run/stop conveyor",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "b26aac472b25362e"
+            ]
+        ]
+    },
+    {
+        "id": "1e3438418865c777",
+        "type": "switch",
+        "z": "35f1323c051b9716",
+        "name": "Is Command Correct",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "switch lock",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "c6b950f6ce0c3493"
+            ]
+        ]
+    },
+    {
+        "id": "1a43068e0dc9720d",
+        "type": "mqtt out",
+        "z": "35f1323c051b9716",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7d0ddbad1ea23174",
+        "x": 870,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "7500c5c395534cb7",
+        "type": "function",
+        "z": "35f1323c051b9716",
+        "name": "Update Conveyor State",
+        "func": "msg.payload = {\"isStopped\": Boolean(msg.payload)};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 40,
+        "wires": [
+            [
+                "1a43068e0dc9720d"
+            ]
+        ]
+    },
+    {
+        "id": "05b16ffb72629cfa",
+        "type": "function",
+        "z": "35f1323c051b9716",
+        "name": "Update Lock State",
+        "func": "msg.payload = {\"isOpened\": Boolean(msg.payload)};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 560,
+        "wires": [
+            [
+                "d607d9700a12c56c"
+            ]
+        ]
+    },
+    {
+        "id": "16ebd5db6ec0a476",
+        "type": "mqtt out",
+        "z": "35f1323c051b9716",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0957617de82d36a4",
+        "x": 870,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a2f2753afb82478f",
+        "type": "mqtt out",
+        "z": "35f1323c051b9716",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "54c9a2ce6ee3b8bb",
+        "x": 870,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8a2532d6886d0b19",
+        "type": "mqtt out",
+        "z": "35f1323c051b9716",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "62adae58e3352ad0",
+        "x": 870,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "401eee36845314dd",
+        "type": "function",
+        "z": "35f1323c051b9716",
+        "name": "Command to Logical Value",
+        "func": "var command = msg.payload.params;\nif (command === \"stop\")\nmsg.payload = 1;\nelse\nmsg.payload = 0;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 100,
+        "wires": [
+            [
+                "95deca6570d1c774",
+                "7500c5c395534cb7"
+            ]
+        ]
+    },
+    {
+        "id": "b5dd03a2f2f723ef",
+        "type": "rpi-gpio out",
+        "z": "35f1323c051b9716",
+        "name": "Lock 2",
+        "pin": "18",
+        "set": true,
+        "level": "0",
+        "freq": "",
+        "out": "out",
+        "x": 930,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "ba9ee15571addab9",
+        "type": "mqtt in",
+        "z": "35f1323c051b9716",
+        "name": "Command \"Switch Lock\"",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "75574e83caa0b1c3",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 280,
+        "wires": [
+            [
+                "ca3ea5392e961174"
+            ]
+        ]
+    },
+    {
+        "id": "0a630a85fdf7bee0",
+        "type": "mqtt out",
+        "z": "35f1323c051b9716",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "75574e83caa0b1c3",
+        "x": 870,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f8cd0babd32d1a43",
+        "type": "link in",
+        "z": "35f1323c051b9716",
+        "name": "To \"Control Conveyor\"",
+        "links": [
+            "2bb894ea2632c946",
+            "85824811123308f9"
+        ],
+        "x": 235,
+        "y": 460,
+        "wires": [
+            [
+                "baa2b238e2348ef0"
+            ]
+        ]
+    },
+    {
+        "id": "7a75f9dea51d02c5",
+        "type": "change",
+        "z": "35f1323c051b9716",
+        "name": "Get Lock",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 160,
+        "wires": [
+            [
+                "1e3438418865c777"
+            ]
+        ]
+    },
+    {
+        "id": "65de55502e7a7296",
+        "type": "change",
+        "z": "35f1323c051b9716",
+        "name": "Get Lock",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "1e3438418865c777"
+            ]
+        ]
+    },
+    {
+        "id": "ca3ea5392e961174",
+        "type": "change",
+        "z": "35f1323c051b9716",
+        "name": "Get Lock",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "2",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "1e3438418865c777"
+            ]
+        ]
+    },
+    {
+        "id": "b036052927208a12",
+        "type": "change",
+        "z": "35f1323c051b9716",
+        "name": "Get Lock",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "3",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 340,
+        "wires": [
+            [
+                "1e3438418865c777"
+            ]
+        ]
+    },
+    {
+        "id": "f2088f1274bae0d8",
+        "type": "switch",
+        "z": "35f1323c051b9716",
+        "name": "Identify Lock",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 590,
+        "y": 380,
+        "wires": [
+            [
+                "b4913853f193e7c9"
+            ],
+            [
+                "2069999cfbd0b476"
+            ],
+            [
+                "b5dd03a2f2f723ef"
+            ],
+            [
+                "079e6579e98c6b58"
+            ]
+        ]
+    },
+    {
+        "id": "d607d9700a12c56c",
+        "type": "switch",
+        "z": "35f1323c051b9716",
+        "name": "Identify Lock",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 590,
+        "y": 560,
+        "wires": [
+            [
+                "16ebd5db6ec0a476"
+            ],
+            [
+                "a2f2753afb82478f"
+            ],
+            [
+                "0a630a85fdf7bee0"
+            ],
+            [
+                "8a2532d6886d0b19"
+            ]
+        ]
+    },
+    {
+        "id": "c6b950f6ce0c3493",
+        "type": "json",
+        "z": "35f1323c051b9716",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "baa2b238e2348ef0"
+            ]
+        ]
+    },
+    {
+        "id": "b26aac472b25362e",
+        "type": "json",
+        "z": "35f1323c051b9716",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 360,
+        "y": 100,
+        "wires": [
+            [
+                "401eee36845314dd"
+            ]
+        ]
+    },
+    {
+        "id": "0957617de82d36a4",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 0\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7d0ddbad1ea23174",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Conveyor\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "54c9a2ce6ee3b8bb",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 1\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "62adae58e3352ad0",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 3\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "75574e83caa0b1c3",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 2\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

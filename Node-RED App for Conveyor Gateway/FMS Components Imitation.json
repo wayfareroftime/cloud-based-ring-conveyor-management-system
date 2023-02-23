@@ -1,0 +1,810 @@
+[
+    {
+        "id": "4da10807937bde89",
+        "type": "tab",
+        "label": "FMS Components Imitation",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "64a073711f408ca2",
+        "type": "mqtt in",
+        "z": "4da10807937bde89",
+        "name": "Commands for Lathe Module",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "5523fb5174c55576",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 40,
+        "wires": [
+            [
+                "947f1923f76aae6f"
+            ]
+        ]
+    },
+    {
+        "id": "cb97a98a7de14fb7",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Command to Conveyor",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5523fb5174c55576",
+        "x": 850,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "8a70ebcf552c8bed",
+        "type": "mqtt in",
+        "z": "4da10807937bde89",
+        "name": "Commands for Milling Module",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "143cd6870fbb3152",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 100,
+        "wires": [
+            [
+                "947f1923f76aae6f"
+            ]
+        ]
+    },
+    {
+        "id": "88e505ec527ab179",
+        "type": "mqtt in",
+        "z": "4da10807937bde89",
+        "name": "Commands for Warehouse",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "7a78f3220c8b25fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "947f1923f76aae6f"
+            ]
+        ]
+    },
+    {
+        "id": "9f24f5e86fb869db",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Command to Conveyor",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "143cd6870fbb3152",
+        "x": 850,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "a3ae922f9002d6ab",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Command to Conveyor",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7a78f3220c8b25fa",
+        "x": 850,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "dc50de750fc922ba",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Failure",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"controlResult\": \"failure\"}",
+        "payloadType": "json",
+        "x": 630,
+        "y": 160,
+        "wires": [
+            [
+                "c295755a1cf2f067"
+            ]
+        ]
+    },
+    {
+        "id": "c295755a1cf2f067",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Control Results to ThingsBoard",
+        "topic": "v1/devices/me/telemetry",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a5cbe5a125a610b6",
+        "x": 870,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "112fc5f152a267e3",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Busy",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": true}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 320,
+        "wires": [
+            [
+                "12478187b29f3bec"
+            ]
+        ]
+    },
+    {
+        "id": "7090e87bb2a7c7f0",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Free",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": false}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 360,
+        "wires": [
+            [
+                "12478187b29f3bec"
+            ]
+        ]
+    },
+    {
+        "id": "12478187b29f3bec",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Attributes to Lathe Module",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "5523fb5174c55576",
+        "x": 370,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "cbd05cc412c914e9",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Busy",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": true}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 520,
+        "wires": [
+            [
+                "e9e7508b12c2a321"
+            ]
+        ]
+    },
+    {
+        "id": "7e0467ae920a0adc",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Free",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": false}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 560,
+        "wires": [
+            [
+                "e9e7508b12c2a321"
+            ]
+        ]
+    },
+    {
+        "id": "e9e7508b12c2a321",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Attributes to Control Module",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a5cbe5a125a610b6",
+        "x": 380,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "3b9db44b290db49d",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Busy",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": true}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 420,
+        "wires": [
+            [
+                "b68f2fae5efefe0b"
+            ]
+        ]
+    },
+    {
+        "id": "8cab22c2335b4bac",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Free",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": false}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 460,
+        "wires": [
+            [
+                "b68f2fae5efefe0b"
+            ]
+        ]
+    },
+    {
+        "id": "b68f2fae5efefe0b",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Attributes to Milling Module",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "143cd6870fbb3152",
+        "x": 380,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f20f6e898106a4fa",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Busy",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": true}",
+        "payloadType": "json",
+        "x": 630,
+        "y": 380,
+        "wires": [
+            [
+                "3f77d76620de1683"
+            ]
+        ]
+    },
+    {
+        "id": "56111b264c73885e",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Free",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"isBusy\": false}",
+        "payloadType": "json",
+        "x": 630,
+        "y": 420,
+        "wires": [
+            [
+                "3f77d76620de1683"
+            ]
+        ]
+    },
+    {
+        "id": "3f77d76620de1683",
+        "type": "mqtt out",
+        "z": "4da10807937bde89",
+        "name": "Attributes to Warehouse",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7a78f3220c8b25fa",
+        "x": 870,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "28d5936b22f8e9e0",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Workpieces Amount",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"workpiecesAmount\": 20}",
+        "payloadType": "json",
+        "x": 630,
+        "y": 500,
+        "wires": [
+            [
+                "3f77d76620de1683"
+            ]
+        ]
+    },
+    {
+        "id": "59bd8f79aeb90970",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Products Amount",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"productsAmount\": 5}",
+        "payloadType": "json",
+        "x": 620,
+        "y": 460,
+        "wires": [
+            [
+                "3f77d76620de1683"
+            ]
+        ]
+    },
+    {
+        "id": "24a4cf95de3e30d9",
+        "type": "debug",
+        "z": "4da10807937bde89",
+        "name": "Log Messages",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f5512341f02179c5",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Success",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"controlResult\": \"success\"}",
+        "payloadType": "json",
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "c295755a1cf2f067"
+            ]
+        ]
+    },
+    {
+        "id": "947f1923f76aae6f",
+        "type": "json",
+        "z": "4da10807937bde89",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "24a4cf95de3e30d9"
+            ]
+        ]
+    },
+    {
+        "id": "a3d29ece962c560e",
+        "type": "mqtt in",
+        "z": "4da10807937bde89",
+        "name": "Command for Control Module",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "a5cbe5a125a610b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 160,
+        "wires": [
+            [
+                "947f1923f76aae6f"
+            ]
+        ]
+    },
+    {
+        "id": "3326f7cb262db215",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Pass Pallet",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"method\": \"pass pallet\", \"params\": {}}",
+        "payloadType": "json",
+        "x": 640,
+        "y": 40,
+        "wires": [
+            [
+                "cb97a98a7de14fb7"
+            ]
+        ]
+    },
+    {
+        "id": "1669fee06f202d8a",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Pass Pallet",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"method\": \"pass pallet\", \"params\": {}}",
+        "payloadType": "json",
+        "x": 640,
+        "y": 100,
+        "wires": [
+            [
+                "9f24f5e86fb869db"
+            ]
+        ]
+    },
+    {
+        "id": "b8b716dbb8e4c8b4",
+        "type": "inject",
+        "z": "4da10807937bde89",
+        "name": "Pass Pallet",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"method\": \"pass pallet\", \"params\": {}}",
+        "payloadType": "json",
+        "x": 640,
+        "y": 260,
+        "wires": [
+            [
+                "a3ae922f9002d6ab"
+            ]
+        ]
+    },
+    {
+        "id": "5523fb5174c55576",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lathe Module\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "143cd6870fbb3152",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Milling Module\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7a78f3220c8b25fa",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Warehouse\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a5cbe5a125a610b6",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Control Module\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

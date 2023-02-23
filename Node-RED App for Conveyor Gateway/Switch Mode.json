@@ -1,0 +1,160 @@
+[
+    {
+        "id": "dd5ebf3d845bc081",
+        "type": "tab",
+        "label": "Switch Mode",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5fe394a41cdb162c",
+        "type": "mqtt in",
+        "z": "dd5ebf3d845bc081",
+        "name": "New Operating Mode",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "7d0ddbad1ea23174",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "f21c50dbb476cba5"
+            ]
+        ]
+    },
+    {
+        "id": "f21c50dbb476cba5",
+        "type": "switch",
+        "z": "dd5ebf3d845bc081",
+        "name": "Is Message Correct",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "operatingMode",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "cf3ec8ab29b884e0"
+            ]
+        ]
+    },
+    {
+        "id": "4bc98ee4541ae3c2",
+        "type": "function",
+        "z": "dd5ebf3d845bc081",
+        "name": "Change Mode",
+        "func": "var mode = msg.payload.operatingMode;\nglobal.set(\"mode\", mode, \"file\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "3d3d0bdedcb89761"
+            ]
+        ]
+    },
+    {
+        "id": "3d3d0bdedcb89761",
+        "type": "switch",
+        "z": "dd5ebf3d845bc081",
+        "name": "Check Mode",
+        "property": "#:(file)::mode",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "manual",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 320,
+        "wires": [
+            [
+                "ebeb71bd2ffdd308"
+            ]
+        ]
+    },
+    {
+        "id": "ebeb71bd2ffdd308",
+        "type": "function",
+        "z": "dd5ebf3d845bc081",
+        "name": "Clear Workpiece Queue and Counters",
+        "func": "global.set(\"workpiece_queue\", [], \"file\");\nglobal.set(\"pass_counter_0\", 0, \"file\");\nglobal.set(\"pass_counter_1\", 0, \"file\");\nglobal.set(\"pass_counter_2\", 0, \"file\");\nglobal.set(\"pass_counter_3\", 0, \"file\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cf3ec8ab29b884e0",
+        "type": "json",
+        "z": "dd5ebf3d845bc081",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "4bc98ee4541ae3c2"
+            ]
+        ]
+    },
+    {
+        "id": "7d0ddbad1ea23174",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Conveyor\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

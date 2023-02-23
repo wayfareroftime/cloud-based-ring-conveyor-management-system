@@ -1,0 +1,116 @@
+[
+    {
+        "id": "c0b6562fb1a0c564",
+        "type": "tab",
+        "label": "Get Order",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b6dd403cb0f35bea",
+        "type": "mqtt in",
+        "z": "c0b6562fb1a0c564",
+        "name": "New Order from ThingsBoard",
+        "topic": "v1/devices/me/rpc/request/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "7d0ddbad1ea23174",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 280,
+        "wires": [
+            [
+                "4e8dd3de9fc9f9a9"
+            ]
+        ]
+    },
+    {
+        "id": "4e8dd3de9fc9f9a9",
+        "type": "switch",
+        "z": "c0b6562fb1a0c564",
+        "name": "Is Order Correct",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "handle order",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "4a65256b9d0b6a41"
+            ]
+        ]
+    },
+    {
+        "id": "ff0cf6778ee61cf3",
+        "type": "function",
+        "z": "c0b6562fb1a0c564",
+        "name": "Update Queue",
+        "func": "var order = msg.payload.params;\nvar workpieceQueue = global.get(\"workpiece_queue\", \"file\")||[];\nworkpieceQueue.push.apply(workpieceQueue, order);\nglobal.set(\"workpiece_queue\", workpieceQueue, \"file\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a65256b9d0b6a41",
+        "type": "json",
+        "z": "c0b6562fb1a0c564",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 640,
+        "y": 280,
+        "wires": [
+            [
+                "ff0cf6778ee61cf3"
+            ]
+        ]
+    },
+    {
+        "id": "7d0ddbad1ea23174",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Conveyor\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

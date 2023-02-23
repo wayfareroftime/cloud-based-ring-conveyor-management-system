@@ -1,0 +1,280 @@
+{
+  "ruleChain": {
+    "additionalInfo": {
+      "description": ""
+    },
+    "name": "RPC Redirector",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 5,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 666,
+          "layoutY": 151
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if Partially Free",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "return metadata.cs_productsAmount < 25;"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 434,
+          "layoutY": 280
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check If Take Pallet",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return msg.method === \"take pallet\";"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 528,
+          "layoutY": 51
+        },
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Get Products Amount",
+        "debugMode": false,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [
+            "productsAmount"
+          ],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 662,
+          "layoutY": 557
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect to Denford",
+        "debugMode": true,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "FROM",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Control Module",
+                "entityTypes": []
+              }
+            ]
+          }
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 820,
+          "layoutY": 281
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainOutputNode",
+        "name": "Success",
+        "debugMode": false,
+        "configuration": {
+          "version": 0
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 51,
+          "layoutY": 282
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Change Message Type",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var newMsgType = \"RPC_CALL_FROM_SERVER_TO_DEVICE\";\nreturn {msg: msg, metadata: metadata, msgType: newMsgType};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 739,
+          "layoutY": 414
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect to Conveyor",
+        "debugMode": true,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "TO",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Transport Module",
+                "entityTypes": []
+              }
+            ]
+          }
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 262,
+          "layoutY": 558
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "Check RPC Method",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "switch (msg.method)\n{\n    case \"process workpiece\":\n        return ['Process Workpiece'];\n    case \"pass pallet\":\n        return ['Pass Pallet'];\n    case \"run/stop conveyor\":\n        return ['Run/Stop Conveyor'];\n}"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 433,
+          "layoutY": 410
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect to Related Devices",
+        "debugMode": false,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "TO",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Located Next To",
+                "entityTypes": []
+              }
+            ]
+          }
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 153,
+          "layoutY": 410
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "Check RPC Originator",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var lockNamePart = /Замок/;\nif (lockNamePart.test(metadata.deviceName))\nreturn ['Conveyor Locks'];\nelse\nreturn ['Other Devices'];\n"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 295,
+          "layoutY": 49
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect to Related Devices",
+        "debugMode": true,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "FROM",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Located Next To",
+                "entityTypes": []
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "True"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "True"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 4,
+        "type": "False"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 0,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 3,
+        "toIndex": 6,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 9,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 4,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 8,
+        "type": "Pass Pallet"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 3,
+        "type": "Run/Stop Conveyor"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 4,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 7,
+        "type": "Other Devices"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 10,
+        "type": "Conveyor Locks"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 1,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}

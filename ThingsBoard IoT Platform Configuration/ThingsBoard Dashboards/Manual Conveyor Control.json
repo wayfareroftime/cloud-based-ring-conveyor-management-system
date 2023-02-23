@@ -1,0 +1,1997 @@
+{
+  "title": "Ручное управление конвейером",
+  "image": null,
+  "mobileHide": false,
+  "mobileOrder": null,
+  "configuration": {
+    "description": "",
+    "widgets": {
+      "19b8b1e5-b7e7-231d-2a96-0ead24941230": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "switch_control",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": false,
+            "showOnOffLabels": true,
+            "title": "Переключить замок 1",
+            "retrieveValueMethod": "attribute",
+            "valueKey": "isOpened",
+            "parseValueFunction": "return data ? true : false;",
+            "requestPersistent": false,
+            "getValueMethod": "getValue",
+            "setValueMethod": "switch lock",
+            "convertValueFunction": "return value ? \"open\" : \"close\";"
+          },
+          "title": "New Switch Control",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "21711ee7-51c3-9864-22c7-5ba501bb24eb"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "19b8b1e5-b7e7-231d-2a96-0ead24941230"
+      },
+      "ea15510b-6d70-5484-afab-ca5649a940fc": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "switch_control",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": false,
+            "getValueMethod": "getValue",
+            "showOnOffLabels": true,
+            "title": "Переключить замок 3",
+            "retrieveValueMethod": "attribute",
+            "valueKey": "isOpened",
+            "parseValueFunction": "return data ? true : false;",
+            "requestPersistent": false,
+            "setValueMethod": "switch lock",
+            "convertValueFunction": "return value ? \"open\" : \"close\";"
+          },
+          "title": "New Switch Control",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "1d2c77e1-2188-9435-5267-59c0b54f0c03"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "ea15510b-6d70-5484-afab-ca5649a940fc"
+      },
+      "67408458-5eab-a447-23b8-6286ff0c3595": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "switch_control",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": false,
+            "getValueMethod": "getValue",
+            "showOnOffLabels": true,
+            "retrieveValueMethod": "attribute",
+            "valueKey": "isStopped",
+            "parseValueFunction": "return data ? true : false;",
+            "requestPersistent": false,
+            "persistentPollingInterval": 5000,
+            "title": "Остановить конвейер",
+            "setValueMethod": "run/stop conveyor",
+            "convertValueFunction": "return value ? \"stop\" : \"run\";"
+          },
+          "title": "New Switch Control",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "bdfc1f2e-516b-cec4-092b-863cdfa55d8a"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "67408458-5eab-a447-23b8-6286ff0c3595"
+      },
+      "1b598b99-c7e9-fa23-c8b1-b503f2101405": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "switch_control",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": false,
+            "getValueMethod": "getValue",
+            "showOnOffLabels": true,
+            "title": "Переключить замок 0",
+            "retrieveValueMethod": "attribute",
+            "valueKey": "isOpened",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value ? \"open\" : \"close\";",
+            "requestPersistent": false,
+            "setValueMethod": "switch lock"
+          },
+          "title": "New Switch Control",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "20a9ff78-d881-e8da-715a-8ac4e8445c9d"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "1b598b99-c7e9-fa23-c8b1-b503f2101405"
+      },
+      "d1fcce97-081c-f71b-0b64-d5c0d726ebcd": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "rpcbutton",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": true,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 5000,
+            "oneWayElseTwoWay": true,
+            "styleButton": {
+              "isRaised": true,
+              "isPrimary": false
+            },
+            "showError": false,
+            "requestPersistent": false,
+            "buttonText": "Пропустить паллету",
+            "methodName": "pass pallet",
+            "methodParams": "{}"
+          },
+          "title": "Замок 0",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "20a9ff78-d881-e8da-715a-8ac4e8445c9d"
+          ],
+          "showTitleIcon": false,
+          "titleTooltip": "",
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "d1fcce97-081c-f71b-0b64-d5c0d726ebcd"
+      },
+      "e6f7f869-be3c-f269-a78f-49df63e261cb": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "round_switch",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": false,
+            "getValueMethod": "getValue",
+            "setValueMethod": "set mode",
+            "retrieveValueMethod": "none",
+            "valueKey": "operatingMode",
+            "parseValueFunction": "return data ? true : false;",
+            "convertValueFunction": "return value ? \"manual\" : \"automatic\";",
+            "requestPersistent": false,
+            "title": "Включить/выключить ручной режим"
+          },
+          "title": "New Round switch",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "bdfc1f2e-516b-cec4-092b-863cdfa55d8a"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "e6f7f869-be3c-f269-a78f-49df63e261cb"
+      },
+      "c2457eae-eb31-7894-6a53-349a8ef3dc78": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Занят"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "20a9ff78-d881-e8da-715a-8ac4e8445c9d"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "c2457eae-eb31-7894-6a53-349a8ef3dc78"
+      },
+      "03cdb932-ecbc-1704-0d09-caf1d942f5b7": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Занят"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "21711ee7-51c3-9864-22c7-5ba501bb24eb"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "03cdb932-ecbc-1704-0d09-caf1d942f5b7"
+      },
+      "65e8a6f4-3f2f-d4d1-d8d7-2c2df5f13242": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Занят"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "1d2c77e1-2188-9435-5267-59c0b54f0c03"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "65e8a6f4-3f2f-d4d1-d8d7-2c2df5f13242"
+      },
+      "0e529061-50da-dc5d-be9b-c372807b8efc": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "switch_control",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": false,
+            "getValueMethod": "getValue",
+            "showOnOffLabels": true,
+            "title": "Переключить замок 2",
+            "retrieveValueMethod": "attribute",
+            "valueKey": "isOpened",
+            "parseValueFunction": "return data ? true : false;",
+            "requestPersistent": false,
+            "setValueMethod": "switch lock",
+            "convertValueFunction": "return value ? \"open\" : \"close\";"
+          },
+          "title": "New Switch Control",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "0e529061-50da-dc5d-be9b-c372807b8efc"
+      },
+      "6991490a-2ea9-0ff7-a925-52be128df9aa": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Занят"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "6991490a-2ea9-0ff7-a925-52be128df9aa"
+      },
+      "ff5e6161-b07e-5b73-3899-2832731a433b": {
+        "isSystemType": true,
+        "bundleAlias": "input_widgets",
+        "typeAlias": "update_multiple_attributes",
+        "type": "latest",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "name": null,
+              "entityAliasId": "bdfc1f2e-516b-cec4-092b-863cdfa55d8a",
+              "filterId": null,
+              "dataKeys": [
+                {
+                  "name": "lastMoveFrom",
+                  "type": "attribute",
+                  "label": "От:",
+                  "color": "#2196f3",
+                  "settings": {
+                    "dataKeyType": "server",
+                    "dataKeyValueType": "select",
+                    "slideToggleLabelPosition": "after",
+                    "selectOptions": [
+                      {
+                        "value": "Токарный модуль"
+                      },
+                      {
+                        "value": "Фрезерный модуль"
+                      },
+                      {
+                        "value": "Модуль контроля"
+                      },
+                      {
+                        "value": "Склад"
+                      }
+                    ],
+                    "step": 1,
+                    "required": true,
+                    "minValueErrorMessage": "",
+                    "maxValueErrorMessage": "",
+                    "invalidDateErrorMessage": "",
+                    "isEditable": "editable",
+                    "dataKeyHidden": false,
+                    "useCustomIcon": false,
+                    "customIcon": "",
+                    "useGetValueFunction": false,
+                    "useSetValueFunction": false,
+                    "requiredErrorMessage": "Необходимо выбрать место отправления!",
+                    "disabledOnDataKey": "isMovePalletExecuted"
+                  },
+                  "_hash": 0.29756397036715065,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": null,
+                  "postFuncBody": null
+                },
+                {
+                  "name": "lastMoveTo",
+                  "type": "attribute",
+                  "label": "К:",
+                  "color": "#4caf50",
+                  "settings": {
+                    "dataKeyType": "server",
+                    "dataKeyValueType": "select",
+                    "slideToggleLabelPosition": "after",
+                    "selectOptions": [
+                      {
+                        "value": "Токарный модуль"
+                      },
+                      {
+                        "value": "Фрезерный модуль"
+                      },
+                      {
+                        "value": "Модуль контроля"
+                      },
+                      {
+                        "value": "Склад"
+                      }
+                    ],
+                    "step": 1,
+                    "required": true,
+                    "minValueErrorMessage": "",
+                    "maxValueErrorMessage": "",
+                    "invalidDateErrorMessage": "",
+                    "isEditable": "editable",
+                    "dataKeyHidden": false,
+                    "useCustomIcon": false,
+                    "customIcon": "",
+                    "useGetValueFunction": false,
+                    "useSetValueFunction": false,
+                    "requiredErrorMessage": "Необходимо выбрать место назначения!",
+                    "disabledOnDataKey": "isMovePalletExecuted"
+                  },
+                  "_hash": 0.7637554844622589,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": null,
+                  "postFuncBody": null
+                },
+                {
+                  "name": "isMovePalletExecuted",
+                  "type": "attribute",
+                  "label": "isMovePalletExecuted",
+                  "color": "#607d8b",
+                  "settings": {
+                    "dataKeyType": "server",
+                    "dataKeyValueType": "string",
+                    "slideToggleLabelPosition": "after",
+                    "selectOptions": [],
+                    "step": 1,
+                    "required": false,
+                    "requiredErrorMessage": "",
+                    "minValueErrorMessage": "",
+                    "maxValueErrorMessage": "",
+                    "invalidDateErrorMessage": "",
+                    "isEditable": "readonly",
+                    "dataKeyHidden": true,
+                    "useCustomIcon": false,
+                    "customIcon": "",
+                    "useGetValueFunction": false,
+                    "useSetValueFunction": false
+                  },
+                  "_hash": 0.22011138016770881,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value === \"true\" ? false : true;\n"
+                },
+                {
+                  "name": "isMovePalletExecuted",
+                  "type": "attribute",
+                  "label": "Статус команды:",
+                  "color": "#f44336",
+                  "settings": {
+                    "dataKeyType": "server",
+                    "dataKeyValueType": "string",
+                    "slideToggleLabelPosition": "after",
+                    "selectOptions": [],
+                    "step": 1,
+                    "required": false,
+                    "requiredErrorMessage": "",
+                    "minValueErrorMessage": "",
+                    "maxValueErrorMessage": "",
+                    "invalidDateErrorMessage": "",
+                    "isEditable": "readonly",
+                    "dataKeyHidden": false,
+                    "useCustomIcon": false,
+                    "customIcon": "",
+                    "useGetValueFunction": false,
+                    "useSetValueFunction": false
+                  },
+                  "_hash": 0.9773413531703656,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value === \"true\" ? \"Выполняется\" : \"Не выполняется\";"
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 60000
+            }
+          },
+          "showTitle": true,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "settings": {
+            "showActionButtons": true,
+            "showResultMessage": false,
+            "showGroupTitle": false,
+            "fieldsAlignment": "row",
+            "updateAllValues": true,
+            "groupTitle": "${entityName}",
+            "fieldsInRow": 2
+          },
+          "title": "Переместить паллету",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "enableDataExport": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "showTitleIcon": false,
+          "titleTooltip": "",
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "ff5e6161-b07e-5b73-3899-2832731a433b"
+      },
+      "a9e9d9e5-132c-8981-2cdc-2fc953f52dd8": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "attributes_card",
+        "type": "latest",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "name": null,
+              "entityAliasId": "20a9ff78-d881-e8da-715a-8ac4e8445c9d",
+              "filterId": null,
+              "dataKeys": [
+                {
+                  "name": "isPassPalletExecuted",
+                  "type": "attribute",
+                  "label": "Статус команды:",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "_hash": 0.3044926346996364,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value === \"true\" ? \"Выполняется\" : \"Не выполняется\";"
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 60000
+            }
+          },
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "settings": {},
+          "title": "New Attributes card",
+          "showTitleIcon": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "noDataDisplayMessage": "",
+          "showLegend": false
+        },
+        "row": 0,
+        "col": 0,
+        "id": "a9e9d9e5-132c-8981-2cdc-2fc953f52dd8"
+      },
+      "c8039fff-41d2-7fea-0232-932f12e1fb44": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "attributes_card",
+        "type": "latest",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "name": null,
+              "entityAliasId": "21711ee7-51c3-9864-22c7-5ba501bb24eb",
+              "filterId": null,
+              "dataKeys": [
+                {
+                  "name": "isPassPalletExecuted",
+                  "type": "attribute",
+                  "label": "Статус команды:",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "_hash": 0.3044926346996364,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value === \"true\" ? \"Выполняется\" : \"Не выполняется\";"
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 60000
+            }
+          },
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "settings": {},
+          "title": "New Attributes card",
+          "showTitleIcon": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "noDataDisplayMessage": "",
+          "showLegend": false
+        },
+        "row": 0,
+        "col": 0,
+        "id": "c8039fff-41d2-7fea-0232-932f12e1fb44"
+      },
+      "819a8658-dc0d-0751-808e-1202c7f9d181": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "attributes_card",
+        "type": "latest",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "name": null,
+              "entityAliasId": "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6",
+              "filterId": null,
+              "dataKeys": [
+                {
+                  "name": "isPassPalletExecuted",
+                  "type": "attribute",
+                  "label": "Статус команды:",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "_hash": 0.3044926346996364,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value === \"true\" ? \"Выполняется\" : \"Не выполняется\";"
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 60000
+            }
+          },
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "settings": {},
+          "title": "New Attributes card",
+          "showTitleIcon": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "noDataDisplayMessage": "",
+          "showLegend": false
+        },
+        "row": 0,
+        "col": 0,
+        "id": "819a8658-dc0d-0751-808e-1202c7f9d181"
+      },
+      "4b76b9c1-6f5e-990b-14d8-014db47f757f": {
+        "isSystemType": true,
+        "bundleAlias": "cards",
+        "typeAlias": "attributes_card",
+        "type": "latest",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 7.5,
+        "sizeY": 3,
+        "config": {
+          "datasources": [
+            {
+              "type": "entity",
+              "name": null,
+              "entityAliasId": "1d2c77e1-2188-9435-5267-59c0b54f0c03",
+              "filterId": null,
+              "dataKeys": [
+                {
+                  "name": "isPassPalletExecuted",
+                  "type": "attribute",
+                  "label": "Статус команды:",
+                  "color": "#2196f3",
+                  "settings": {},
+                  "_hash": 0.3044926346996364,
+                  "units": null,
+                  "decimals": null,
+                  "funcBody": null,
+                  "usePostProcessing": true,
+                  "postFuncBody": "return value === \"true\" ? \"Выполняется\" : \"Не выполняется\";"
+                }
+              ]
+            }
+          ],
+          "timewindow": {
+            "realtime": {
+              "timewindowMs": 60000
+            }
+          },
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "8px",
+          "settings": {},
+          "title": "New Attributes card",
+          "showTitleIcon": false,
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "widgetCss": "",
+          "noDataDisplayMessage": "",
+          "showLegend": false
+        },
+        "row": 0,
+        "col": 0,
+        "id": "4b76b9c1-6f5e-990b-14d8-014db47f757f"
+      },
+      "85a707ef-406d-812f-f982-063af06155a9": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "rpcbutton",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": true,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 5000,
+            "oneWayElseTwoWay": true,
+            "styleButton": {
+              "isRaised": true,
+              "isPrimary": false
+            },
+            "showError": false,
+            "requestPersistent": false,
+            "buttonText": "Пропустить паллету",
+            "methodName": "pass pallet",
+            "methodParams": "{}"
+          },
+          "title": "Замок 1",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "21711ee7-51c3-9864-22c7-5ba501bb24eb"
+          ],
+          "showTitleIcon": false,
+          "titleTooltip": "",
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "85a707ef-406d-812f-f982-063af06155a9"
+      },
+      "fd1d4566-2d9c-f749-d5af-4b388d010f19": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "rpcbutton",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": true,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 5000,
+            "oneWayElseTwoWay": true,
+            "styleButton": {
+              "isRaised": true,
+              "isPrimary": false
+            },
+            "showError": false,
+            "requestPersistent": false,
+            "buttonText": "Пропустить паллету",
+            "methodName": "pass pallet",
+            "methodParams": "{}"
+          },
+          "title": "Замок 2",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6"
+          ],
+          "showTitleIcon": false,
+          "titleTooltip": "",
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "fd1d4566-2d9c-f749-d5af-4b388d010f19"
+      },
+      "18d296fe-c895-4326-a0f1-e87812df11b7": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "rpcbutton",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 4,
+        "sizeY": 2,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": true,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 5000,
+            "oneWayElseTwoWay": true,
+            "styleButton": {
+              "isRaised": true,
+              "isPrimary": false
+            },
+            "showError": false,
+            "requestPersistent": false,
+            "buttonText": "Пропустить паллету",
+            "methodName": "pass pallet",
+            "methodParams": "{}"
+          },
+          "title": "Замок 3",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "1d2c77e1-2188-9435-5267-59c0b54f0c03"
+          ],
+          "showTitleIcon": false,
+          "titleTooltip": "",
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "18d296fe-c895-4326-a0f1-e87812df11b7"
+      },
+      "5aef9a6c-8b61-44e0-5e22-2a6fe309162c": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "title": "Остановлен",
+            "ledColor": "#fffb00",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isStopped"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "bdfc1f2e-516b-cec4-092b-863cdfa55d8a"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "5aef9a6c-8b61-44e0-5e22-2a6fe309162c"
+      },
+      "6c36e0a5-69aa-b77a-d6a4-4b5310589351": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "title": "Открыт",
+            "ledColor": "#4caf50",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isOpened"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "20a9ff78-d881-e8da-715a-8ac4e8445c9d"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "6c36e0a5-69aa-b77a-d6a4-4b5310589351"
+      },
+      "690d5a14-6ca2-07e1-e80e-d63b46be904a": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "title": "Открыт",
+            "ledColor": "#4caf50",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isOpened"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "21711ee7-51c3-9864-22c7-5ba501bb24eb"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "690d5a14-6ca2-07e1-e80e-d63b46be904a"
+      },
+      "8dd32c60-5673-9830-e07b-fdef2389c917": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "title": "Открыт",
+            "ledColor": "#4caf50",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isOpened"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "8dd32c60-5673-9830-e07b-fdef2389c917"
+      },
+      "12f4d7e6-6c09-af52-391b-b6b47cc1c409": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "title": "Открыт",
+            "ledColor": "#4caf50",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isOpened"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "1d2c77e1-2188-9435-5267-59c0b54f0c03"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "12f4d7e6-6c09-af52-391b-b6b47cc1c409"
+      },
+      "a0f55b3f-9b22-e672-d6ab-285518ffa56f": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Склад"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "4540a6d7-b227-c9a2-026b-a0401031f0ec"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "a0f55b3f-9b22-e672-d6ab-285518ffa56f"
+      },
+      "23214f3f-93b0-8b3a-ee22-9f5ce1f8f884": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Токарный модуль"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "d88ff2e6-eb1d-46a4-d6d7-142441fd7358"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "23214f3f-93b0-8b3a-ee22-9f5ce1f8f884"
+      },
+      "d5f41ef5-ed7d-d2e0-4416-8933c9f750bd": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Фрезерный модуль"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "4da102fe-f21f-aa77-02c4-88768444f724"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "d5f41ef5-ed7d-d2e0-4416-8933c9f750bd"
+      },
+      "28460ccf-5eb9-0c6d-ee9c-69e0cced67ef": {
+        "isSystemType": true,
+        "bundleAlias": "control_widgets",
+        "typeAlias": "led_indicator",
+        "type": "rpc",
+        "title": "New widget",
+        "image": null,
+        "description": null,
+        "sizeX": 2.5,
+        "sizeY": 2.5,
+        "config": {
+          "targetDeviceAliases": [],
+          "showTitle": false,
+          "backgroundColor": "#f3f3f3",
+          "color": "rgba(0, 0, 0, 0.87)",
+          "padding": "0px",
+          "settings": {
+            "requestTimeout": 500,
+            "initialValue": true,
+            "ledColor": "#ff0000",
+            "retrieveValueMethod": "attribute",
+            "parseValueFunction": "return data ? true : false;",
+            "performCheckStatus": false,
+            "checkStatusMethod": "checkStatus",
+            "requestPersistent": false,
+            "valueAttribute": "isBusy",
+            "title": "Модуль контроля"
+          },
+          "title": "New Led indicator",
+          "dropShadow": true,
+          "enableFullscreen": false,
+          "widgetStyle": {},
+          "titleStyle": {
+            "fontSize": "16px",
+            "fontWeight": 400
+          },
+          "useDashboardTimewindow": true,
+          "showLegend": false,
+          "actions": {},
+          "decimals": 2,
+          "datasources": [],
+          "targetDeviceAliasIds": [
+            "139731d5-46ee-32d9-1b6a-1ce82ca51058"
+          ],
+          "widgetCss": "",
+          "noDataDisplayMessage": ""
+        },
+        "row": 0,
+        "col": 0,
+        "id": "28460ccf-5eb9-0c6d-ee9c-69e0cced67ef"
+      }
+    },
+    "states": {
+      "default": {
+        "name": "ГПС \"Denford\"",
+        "root": true,
+        "layouts": {
+          "main": {
+            "widgets": {
+              "19b8b1e5-b7e7-231d-2a96-0ead24941230": {
+                "sizeX": 3,
+                "sizeY": 2,
+                "row": 5,
+                "col": 6
+              },
+              "ea15510b-6d70-5484-afab-ca5649a940fc": {
+                "sizeX": 3,
+                "sizeY": 2,
+                "row": 9,
+                "col": 6
+              },
+              "67408458-5eab-a447-23b8-6286ff0c3595": {
+                "sizeX": 5,
+                "sizeY": 2,
+                "row": 0,
+                "col": 6
+              },
+              "1b598b99-c7e9-fa23-c8b1-b503f2101405": {
+                "sizeX": 3,
+                "sizeY": 2,
+                "row": 3,
+                "col": 6
+              },
+              "d1fcce97-081c-f71b-0b64-d5c0d726ebcd": {
+                "sizeX": 4,
+                "sizeY": 2,
+                "row": 3,
+                "col": 9
+              },
+              "e6f7f869-be3c-f269-a78f-49df63e261cb": {
+                "sizeX": 6,
+                "sizeY": 3,
+                "row": 0,
+                "col": 0
+              },
+              "c2457eae-eb31-7894-6a53-349a8ef3dc78": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 3,
+                "col": 22
+              },
+              "03cdb932-ecbc-1704-0d09-caf1d942f5b7": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 5,
+                "col": 22
+              },
+              "65e8a6f4-3f2f-d4d1-d8d7-2c2df5f13242": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 9,
+                "col": 22
+              },
+              "0e529061-50da-dc5d-be9b-c372807b8efc": {
+                "sizeX": 3,
+                "sizeY": 2,
+                "row": 7,
+                "col": 6
+              },
+              "6991490a-2ea9-0ff7-a925-52be128df9aa": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 7,
+                "col": 22
+              },
+              "ff5e6161-b07e-5b73-3899-2832731a433b": {
+                "sizeX": 6,
+                "sizeY": 8,
+                "row": 3,
+                "col": 0
+              },
+              "a9e9d9e5-132c-8981-2cdc-2fc953f52dd8": {
+                "sizeX": 7,
+                "sizeY": 2,
+                "row": 3,
+                "col": 13
+              },
+              "c8039fff-41d2-7fea-0232-932f12e1fb44": {
+                "sizeX": 7,
+                "sizeY": 2,
+                "row": 5,
+                "col": 13
+              },
+              "819a8658-dc0d-0751-808e-1202c7f9d181": {
+                "sizeX": 7,
+                "sizeY": 2,
+                "row": 7,
+                "col": 13
+              },
+              "4b76b9c1-6f5e-990b-14d8-014db47f757f": {
+                "sizeX": 7,
+                "sizeY": 2,
+                "row": 9,
+                "col": 13
+              },
+              "85a707ef-406d-812f-f982-063af06155a9": {
+                "sizeX": 4,
+                "sizeY": 2,
+                "row": 5,
+                "col": 9
+              },
+              "fd1d4566-2d9c-f749-d5af-4b388d010f19": {
+                "sizeX": 4,
+                "sizeY": 2,
+                "row": 7,
+                "col": 9
+              },
+              "18d296fe-c895-4326-a0f1-e87812df11b7": {
+                "sizeX": 4,
+                "sizeY": 2,
+                "row": 9,
+                "col": 9
+              },
+              "5aef9a6c-8b61-44e0-5e22-2a6fe309162c": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 0,
+                "col": 11
+              },
+              "6c36e0a5-69aa-b77a-d6a4-4b5310589351": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 3,
+                "col": 20
+              },
+              "690d5a14-6ca2-07e1-e80e-d63b46be904a": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 5,
+                "col": 20
+              },
+              "8dd32c60-5673-9830-e07b-fdef2389c917": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 7,
+                "col": 20
+              },
+              "12f4d7e6-6c09-af52-391b-b6b47cc1c409": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 9,
+                "col": 20
+              },
+              "a0f55b3f-9b22-e672-d6ab-285518ffa56f": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 0,
+                "col": 16
+              },
+              "23214f3f-93b0-8b3a-ee22-9f5ce1f8f884": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 0,
+                "col": 18
+              },
+              "d5f41ef5-ed7d-d2e0-4416-8933c9f750bd": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 0,
+                "col": 20
+              },
+              "28460ccf-5eb9-0c6d-ee9c-69e0cced67ef": {
+                "sizeX": 2,
+                "sizeY": 2,
+                "row": 0,
+                "col": 22
+              }
+            },
+            "gridSettings": {
+              "backgroundColor": "#eeeeee",
+              "columns": 24,
+              "margin": 10,
+              "backgroundSizeMode": "100%"
+            }
+          }
+        }
+      }
+    },
+    "entityAliases": {
+      "09822c2d-17f5-34de-7b5f-0442c4d26826": {
+        "id": "09822c2d-17f5-34de-7b5f-0442c4d26826",
+        "alias": "ГПС",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "ASSET",
+            "id": "ae8aa270-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "20a9ff78-d881-e8da-715a-8ac4e8445c9d": {
+        "id": "20a9ff78-d881-e8da-715a-8ac4e8445c9d",
+        "alias": "Замок 0",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "7a9935d0-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "21711ee7-51c3-9864-22c7-5ba501bb24eb": {
+        "id": "21711ee7-51c3-9864-22c7-5ba501bb24eb",
+        "alias": "Замок 1",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "7e251bb0-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "1d2c77e1-2188-9435-5267-59c0b54f0c03": {
+        "id": "1d2c77e1-2188-9435-5267-59c0b54f0c03",
+        "alias": "Замок 3",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "85415440-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "bdfc1f2e-516b-cec4-092b-863cdfa55d8a": {
+        "id": "bdfc1f2e-516b-cec4-092b-863cdfa55d8a",
+        "alias": "Конвейер",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "760a5ee0-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6": {
+        "id": "ddcaf9af-d678-31c8-45e8-a4b4d2c33ca6",
+        "alias": "Замок 2",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "81c992a0-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "4540a6d7-b227-c9a2-026b-a0401031f0ec": {
+        "id": "4540a6d7-b227-c9a2-026b-a0401031f0ec",
+        "alias": "Склад",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "710c7270-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "d88ff2e6-eb1d-46a4-d6d7-142441fd7358": {
+        "id": "d88ff2e6-eb1d-46a4-d6d7-142441fd7358",
+        "alias": "Токарный модуль",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "89a63500-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "4da102fe-f21f-aa77-02c4-88768444f724": {
+        "id": "4da102fe-f21f-aa77-02c4-88768444f724",
+        "alias": "Фрезерный модуль",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "909717d0-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "139731d5-46ee-32d9-1b6a-1ce82ca51058": {
+        "id": "139731d5-46ee-32d9-1b6a-1ce82ca51058",
+        "alias": "Модуль контроля",
+        "filter": {
+          "type": "singleEntity",
+          "resolveMultiple": false,
+          "singleEntity": {
+            "entityType": "DEVICE",
+            "id": "9581f170-d3e7-11ec-9d6f-97bfe39f5ab0"
+          }
+        }
+      },
+      "0b78be83-0543-a901-5f42-5d708994630a": {
+        "id": "0b78be83-0543-a901-5f42-5d708994630a",
+        "alias": "Компоненты ГПС",
+        "filter": {
+          "type": "entityList",
+          "resolveMultiple": true,
+          "entityType": "DEVICE",
+          "entityList": [
+            "760a5ee0-d3e7-11ec-9d6f-97bfe39f5ab0",
+            "9581f170-d3e7-11ec-9d6f-97bfe39f5ab0",
+            "710c7270-d3e7-11ec-9d6f-97bfe39f5ab0",
+            "89a63500-d3e7-11ec-9d6f-97bfe39f5ab0",
+            "909717d0-d3e7-11ec-9d6f-97bfe39f5ab0"
+          ]
+        }
+      }
+    },
+    "filters": {},
+    "timewindow": {
+      "displayValue": "",
+      "hideInterval": false,
+      "hideAggregation": false,
+      "hideAggInterval": false,
+      "hideTimezone": false,
+      "selectedTab": 0,
+      "realtime": {
+        "realtimeType": 0,
+        "interval": 1000,
+        "timewindowMs": 60000,
+        "quickInterval": "CURRENT_DAY"
+      },
+      "history": {
+        "historyType": 0,
+        "interval": 1000,
+        "timewindowMs": 60000,
+        "fixedTimewindow": {
+          "startTimeMs": 1650490161345,
+          "endTimeMs": 1650576561345
+        },
+        "quickInterval": "CURRENT_DAY"
+      },
+      "aggregation": {
+        "type": "AVG",
+        "limit": 25000
+      }
+    },
+    "settings": {
+      "stateControllerId": "entity",
+      "showTitle": false,
+      "showDashboardsSelect": true,
+      "showEntitiesSelect": true,
+      "showDashboardTimewindow": true,
+      "showDashboardExport": true,
+      "toolbarAlwaysOpen": true
+    }
+  },
+  "name": "Ручное управление конвейером"
+}

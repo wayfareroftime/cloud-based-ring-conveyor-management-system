@@ -1,0 +1,319 @@
+{
+  "ruleChain": {
+    "additionalInfo": null,
+    "name": "Root Rule Chain",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 4,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 432,
+          "layoutY": 355
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if Switch Mode",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return msg.method === \"set mode\";"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 692,
+          "layoutY": 525
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Handle Order",
+        "debugMode": true,
+        "configuration": {
+          "ruleChainId": "016f72f0-d3e7-11ec-9d6f-97bfe39f5ab0"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 350,
+          "layoutY": 115
+        },
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgTimeseriesNode",
+        "name": "Save Timeseries",
+        "debugMode": true,
+        "configuration": {
+          "defaultTTL": 0
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 566,
+          "layoutY": 168
+        },
+        "type": "org.thingsboard.rule.engine.telemetry.TbMsgAttributesNode",
+        "name": "Save Client Attributes",
+        "debugMode": true,
+        "configuration": {
+          "scope": "CLIENT_SCOPE",
+          "notifyDevice": "false"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 41,
+          "layoutY": 271
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbMsgTypeSwitchNode",
+        "name": "Message Type Switch",
+        "debugMode": false,
+        "configuration": {
+          "version": 0
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 525,
+          "layoutY": 252
+        },
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log RPC from Device",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 316,
+          "layoutY": 618
+        },
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Other",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return '\\nIncoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": null,
+          "layoutX": 1067,
+          "layoutY": 395
+        },
+        "type": "org.thingsboard.rule.engine.rpc.TbSendRPCRequestNode",
+        "name": "RPC Call Request",
+        "debugMode": true,
+        "configuration": {
+          "timeoutInSeconds": 60
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 698,
+          "layoutY": 621
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Handle \"Move Pallet\" Command",
+        "debugMode": false,
+        "configuration": {
+          "ruleChainId": "ec40c7d0-d3e6-11ec-9d6f-97bfe39f5ab0"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 378,
+          "layoutY": 480
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "Check Command Type",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "if (msg.lastProductType && msg.lastAmount)\nreturn ['Order'];\nelse if (msg.lastMoveFrom && msg.lastMoveTo)\nreturn ['Move Pallet'];\nelse\nreturn ['Other'];"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 786,
+          "layoutY": 118
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Handle Control Result",
+        "debugMode": false,
+        "configuration": {
+          "ruleChainId": "98dafcf0-d3e6-11ec-9d6f-97bfe39f5ab0"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 578,
+          "layoutY": 30
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbCheckMessageNode",
+        "name": "Check if Control Result",
+        "debugMode": true,
+        "configuration": {
+          "messageNames": [
+            "controlResult"
+          ],
+          "metadataNames": [],
+          "checkAllKeys": true
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 695,
+          "layoutY": 435
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Handle Server-Side RPC",
+        "debugMode": false,
+        "configuration": {
+          "ruleChainId": "f38744b0-d3e6-11ec-9d6f-97bfe39f5ab0"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 698,
+          "layoutY": 317
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Switch Mode",
+        "debugMode": false,
+        "configuration": {
+          "ruleChainId": "faabe1b0-d3e6-11ec-9d6f-97bfe39f5ab0"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 926,
+          "layoutY": 241
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainInputNode",
+        "name": "Redirect RPC",
+        "debugMode": false,
+        "configuration": {
+          "ruleChainId": "07f5ad10-d3e7-11ec-9d6f-97bfe39f5ab0"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 13,
+        "type": "True"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 12,
+        "type": "False"
+      },
+      {
+        "fromIndex": 0,
+        "toIndex": 7,
+        "type": "True"
+      },
+      {
+        "fromIndex": 1,
+        "toIndex": 7,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 11,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 6,
+        "type": "Other"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 3,
+        "type": "Post attributes"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 5,
+        "type": "RPC Request from Device"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 2,
+        "type": "Post telemetry"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 9,
+        "type": "Attributes Updated"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 0,
+        "type": "RPC Request to Device"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 14,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 7,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 1,
+        "type": "Order"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 6,
+        "type": "Other"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 8,
+        "type": "Move Pallet"
+      },
+      {
+        "fromIndex": 10,
+        "toIndex": 14,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 11,
+        "toIndex": 10,
+        "type": "True"
+      },
+      {
+        "fromIndex": 12,
+        "toIndex": 7,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 14,
+        "toIndex": 7,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}

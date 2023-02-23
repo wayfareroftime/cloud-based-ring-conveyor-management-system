@@ -1,0 +1,224 @@
+{
+  "ruleChain": {
+    "additionalInfo": {
+      "description": ""
+    },
+    "name": "Control Results Handler",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 6,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 824,
+          "layoutY": 321
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainOutputNode",
+        "name": "Success",
+        "debugMode": false,
+        "configuration": {
+          "version": 0
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 351,
+          "layoutY": 101
+        },
+        "type": "org.thingsboard.rule.engine.mail.TbMsgToEmailNode",
+        "name": "Prepare Email",
+        "debugMode": true,
+        "configuration": {
+          "fromTemplate": "Thingsboard <ntsisevich@yandex.ru>",
+          "toTemplate": "ntsisevich@yandex.ru",
+          "ccTemplate": null,
+          "bccTemplate": null,
+          "subjectTemplate": "Нештатная ситуация",
+          "mailBodyType": "false",
+          "isHtmlTemplate": null,
+          "bodyTemplate": "Обнаружен брак"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 650,
+          "layoutY": 100
+        },
+        "type": "org.thingsboard.rule.engine.mail.TbSendEmailNode",
+        "name": "Send Email",
+        "debugMode": true,
+        "configuration": {
+          "useSystemSmtpSettings": true,
+          "smtpHost": "localhost",
+          "smtpPort": 25,
+          "username": null,
+          "password": null,
+          "smtpProtocol": "smtp",
+          "timeout": 10000,
+          "enableTls": false,
+          "tlsVersion": "TLSv1.2",
+          "enableProxy": false,
+          "proxyHost": null,
+          "proxyPort": null,
+          "proxyUser": null,
+          "proxyPassword": null
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 494,
+          "layoutY": 586
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if Automatic",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "return metadata.shared_operatingMode === \"automatic\";"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 350,
+          "layoutY": 471
+        },
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Get Operating Mode",
+        "debugMode": false,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [
+            "operatingMode"
+          ],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 620,
+          "layoutY": 471
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Build RPC Request",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var newMsg = {\"method\": \"pass pallet\",\n\"params\": {}};\nvar newMsgType = \"RPC_CALL_FROM_SERVER_TO_DEVICE\";\nreturn {msg: newMsg, metadata: metadata, msgType: newMsgType};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 101,
+          "layoutY": 327
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if Failure",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "return msg.controlResult === \"failure\";"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 607,
+          "layoutY": 204
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Build RPC Request",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var newMsg = {\"method\": \"run/stop conveyor\",\n\"params\": \"stop\"};\nvar newMsgType = \"RPC_CALL_FROM_SERVER_TO_DEVICE\";\nreturn {msg: newMsg, metadata: metadata, msgType: newMsgType};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 394,
+          "layoutY": 326
+        },
+        "type": "org.thingsboard.rule.engine.action.TbCreateAlarmNode",
+        "name": "Create Alarm",
+        "debugMode": true,
+        "configuration": {
+          "alarmDetailsBuildJs": "var details = {};\nif (metadata.prevAlarmDetails) {\n    details = JSON.parse(metadata.prevAlarmDetails);\n    //remove prevAlarmDetails from metadata\n    delete metadata.prevAlarmDetails;\n    //now metadata is the same as it comes IN this rule node\n}\n\n\nreturn details;",
+          "useMessageAlarmData": false,
+          "overwriteAlarmDetails": false,
+          "alarmType": "Выявлен брак",
+          "severity": "MAJOR",
+          "propagate": false,
+          "relationTypes": [],
+          "propagateToOwner": true,
+          "propagateToTenant": true,
+          "dynamicSeverity": false
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 3,
+        "toIndex": 5,
+        "type": "True"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 0,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 4,
+        "type": "False"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 1,
+        "type": "True"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 8,
+        "type": "True"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 0,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 7,
+        "type": "Created"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 7,
+        "type": "Updated"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}

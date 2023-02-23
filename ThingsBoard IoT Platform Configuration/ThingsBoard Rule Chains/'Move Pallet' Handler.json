@@ -1,0 +1,131 @@
+{
+  "ruleChain": {
+    "additionalInfo": {
+      "description": ""
+    },
+    "name": "\"Move Pallet\" Handler",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 1,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 788,
+          "layoutY": 369
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainOutputNode",
+        "name": "Success",
+        "debugMode": false,
+        "configuration": {
+          "version": 0
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 66,
+          "layoutY": 249
+        },
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Get \"Pass Pallet\" Status",
+        "debugMode": false,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [
+            "isPassPalletExecuted"
+          ],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 68,
+          "layoutY": 368
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if \"Pass Pallet\" Executed",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "return metadata.cs_isPassPalletExecuted === \"true\";"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 609,
+          "layoutY": 477
+        },
+        "type": "org.thingsboard.rule.engine.action.TbLogNode",
+        "name": "Log Incorrect Data",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "return 'Incoming message:\\n' + JSON.stringify(msg) + '\\nIncoming metadata:\\n' + JSON.stringify(metadata);"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 367,
+          "layoutY": 367
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if Start is Equal to End",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return msg.lastMoveFrom === msg.lastMoveTo;"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 597,
+          "layoutY": 252
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Convert to RPC",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var newMsgType = \"RPC_CALL_FROM_SERVER_TO_DEVICE\";\nvar newMsg = {\"method\": \"move pallet\",\n    \"params\": {\"from\": findLockNumber(msg.lastMoveFrom), \n        \"to\": findLockNumber(msg.lastMoveTo)}};\nreturn {msg: newMsg, metadata: metadata, msgType: newMsgType};\n\nfunction findLockNumber(device)\n{\nswitch (device)\n{\n    case \"Токарный модуль\":\n        return 0;\n    case \"Фрезерный модуль\":\n        return 1;\n    case \"Модуль контроля\":\n        return 2;\n    case \"Склад\":\n        return 3;\n}\n}"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 1,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 4,
+        "type": "False"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 3,
+        "type": "True"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 5,
+        "type": "False"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 0,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}

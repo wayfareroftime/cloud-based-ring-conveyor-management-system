@@ -1,0 +1,1323 @@
+[
+    {
+        "id": "af3625fa1441f2d4",
+        "type": "subflow",
+        "name": "Is Pallet Detected",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "6061f601aef320cd"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 940,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "4ffd03eeafb8659b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "6061f601aef320cd",
+        "type": "switch",
+        "z": "af3625fa1441f2d4",
+        "name": "Check Lock State",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "d4054a5081333912"
+            ]
+        ]
+    },
+    {
+        "id": "d4054a5081333912",
+        "type": "delay",
+        "z": "af3625fa1441f2d4",
+        "name": "Delay",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 240,
+        "wires": [
+            [
+                "4ffd03eeafb8659b"
+            ]
+        ]
+    },
+    {
+        "id": "4ffd03eeafb8659b",
+        "type": "function",
+        "z": "af3625fa1441f2d4",
+        "name": "Check Lock State after Delay",
+        "func": "if (global.get(`sensor_${msg.topic}_readings`) === 1)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "10b9fc9461317cdc",
+        "type": "subflow",
+        "name": "Preapre Commands for Locks on Path",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "d21441f99ad6a3a3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 920,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "901dde89a3410e8f",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "d21441f99ad6a3a3",
+        "type": "function",
+        "z": "10b9fc9461317cdc",
+        "name": "Send Closing Commands",
+        "func": "var route = global.get(\"route\", \"file\").slice();\nif (route.length > 2)\n{\n    msg.payload = [];\n    for (var i=0; i < route.length-2; i++)\n    {\n        msg.payload.push({\"method\": \"switch lock\", \"params\": \"close\"});\n    }\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "91bd43d4dcbbb37b"
+            ]
+        ]
+    },
+    {
+        "id": "91bd43d4dcbbb37b",
+        "type": "split",
+        "z": "10b9fc9461317cdc",
+        "name": "Split Commands",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "901dde89a3410e8f"
+            ]
+        ]
+    },
+    {
+        "id": "901dde89a3410e8f",
+        "type": "function",
+        "z": "10b9fc9461317cdc",
+        "name": "Identify Receiver",
+        "func": "var route = global.get(\"route\", \"file\").slice();\nif (msg.parts.index === 0)\nmsg.topic = route[1];\nelse\nmsg.topic = route[2];\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "54ec1a0e90ce21bf",
+        "type": "subflow",
+        "name": "Close Locks after Clearing Path",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 300,
+                "wires": [
+                    {
+                        "id": "5ef970274d12f0e7"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 980,
+                "y": 260,
+                "wires": [
+                    {
+                        "id": "167a1d334cf3ea53",
+                        "port": 0
+                    },
+                    {
+                        "id": "16160ba757c84583",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "9d5f6f459e44b473",
+        "type": "trigger",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Lock Free",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "2.5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 450,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "8998b505540e69d8"
+            ]
+        ]
+    },
+    {
+        "id": "167a1d334cf3ea53",
+        "type": "change",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Send Closing Command to Finish Lock",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"method\": \"switch lock\", \"params\": \"close\"} ",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "is_path_clearing_finished",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8135a0d33f2d4f4e",
+        "type": "function",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Counting at Lock Allowed",
+        "func": "var route = global.get(\"route\", \"file\").slice();\nvar finishLock = route[route.length-1];\nif (finishLock === msg.topic)\n{\nif (!global.get(`is_counting_at_lock_${msg.topic}_allowed`))\nreturn [msg, null, null];\nelse\nreturn [null, msg, null];\n}\nelse if (route.length > 2)\n{\n    var routeWithoutBorders = route.splice(1, route.length-2);\n    for (var lock in routeWithoutBorders)\n    {\n        if (routeWithoutBorders[lock] === msg.topic &&\n        global.get(`is_counting_at_lock_${msg.topic}_allowed`))\n        {\n            return [null, null, msg];\n        }\n    }\n}\n",
+        "outputs": 3,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 460,
+        "wires": [
+            [
+                "a730023774121612"
+            ],
+            [
+                "05dbcdb829a05804"
+            ],
+            [
+                "2c20e7fd67f066e8"
+            ]
+        ]
+    },
+    {
+        "id": "ec050f850ff4830c",
+        "type": "function",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Allow Finish Lock to Count ",
+        "func": "global.set(`is_counting_at_lock_${msg.topic}_allowed`, true);",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 720,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a730023774121612",
+        "type": "switch",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Path Clearing Finished",
+        "property": "is_path_clearing_finished",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "535a2fb21658b304"
+            ],
+            [
+                "9d5f6f459e44b473"
+            ]
+        ]
+    },
+    {
+        "id": "5ef970274d12f0e7",
+        "type": "switch",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Signal HIGH",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 140,
+        "y": 380,
+        "wires": [
+            [
+                "8135a0d33f2d4f4e"
+            ]
+        ]
+    },
+    {
+        "id": "0bb38b7fb7123dab",
+        "type": "change",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Update Command Status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"isMovePalletExecuted\": false}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 60,
+        "wires": [
+            [
+                "7f242fad0fce6077"
+            ]
+        ]
+    },
+    {
+        "id": "7f242fad0fce6077",
+        "type": "mqtt out",
+        "z": "54ec1a0e90ce21bf",
+        "name": "New Status to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "7d0ddbad1ea23174",
+        "x": 720,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "16160ba757c84583",
+        "type": "subflow:10b9fc9461317cdc",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Prepare Commands for Locks on Path",
+        "env": [],
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c20e7fd67f066e8",
+        "type": "function",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Count Pallet Legs",
+        "func": "var palletLegsCount = global.get(\"pallet_legs_counter\");\nglobal.set(\"pallet_legs_counter\", palletLegsCount+1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 540,
+        "wires": [
+            [
+                "0a8fdbac3d0c0da0"
+            ]
+        ]
+    },
+    {
+        "id": "0a8fdbac3d0c0da0",
+        "type": "trigger",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Lock Free",
+        "op1": "1",
+        "op2": "0",
+        "op1type": "str",
+        "op2type": "str",
+        "duration": "2.5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 670,
+        "y": 540,
+        "wires": [
+            [],
+            [
+                "7d69b7686fb32734"
+            ]
+        ]
+    },
+    {
+        "id": "05dbcdb829a05804",
+        "type": "function",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Count Pallet Legs",
+        "func": "var palletLegsCount = global.get(\"pallet_legs_counter\");\nglobal.set(\"pallet_legs_counter\", palletLegsCount-1);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 460,
+        "wires": [
+            [
+                "64a47028e04d74cc"
+            ]
+        ]
+    },
+    {
+        "id": "64a47028e04d74cc",
+        "type": "switch",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Counter Value Zero",
+        "property": "pallet_legs_counter",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 700,
+        "y": 460,
+        "wires": [
+            [
+                "7d69b7686fb32734",
+                "167a1d334cf3ea53"
+            ]
+        ]
+    },
+    {
+        "id": "7d69b7686fb32734",
+        "type": "function",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Prohibit Counting",
+        "func": "global.set(`is_counting_at_lock_${msg.topic}_allowed`, false);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8998b505540e69d8",
+        "type": "switch",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Is Each Lock on Path Free",
+        "property": "is_each_lock_on_path_free",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 720,
+        "y": 300,
+        "wires": [
+            [
+                "ec050f850ff4830c"
+            ],
+            [
+                "167a1d334cf3ea53"
+            ]
+        ]
+    },
+    {
+        "id": "535a2fb21658b304",
+        "type": "change",
+        "z": "54ec1a0e90ce21bf",
+        "name": "Reset Context",
+        "rules": [
+            {
+                "t": "set",
+                "p": "is_counting_at_lock_0_allowed",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "is_counting_at_lock_1_allowed",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "is_counting_at_lock_2_allowed",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "is_counting_at_lock_3_allowed",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "is_each_lock_on_path_free",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "is_move_pallet_executed",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "is_path_clearing_finished",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "pallet_legs_counter",
+                "pt": "global",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "16160ba757c84583",
+                "0bb38b7fb7123dab"
+            ]
+        ]
+    },
+    {
+        "id": "7d0ddbad1ea23174",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Conveyor\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "00c2a50688de2b17",
+        "type": "tab",
+        "label": "Act on Readings Update",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "761ff9573df22565",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "62adae58e3352ad0",
+        "x": 850,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "e2c2b6af47fac5e5",
+        "type": "rpi-gpio in",
+        "z": "00c2a50688de2b17",
+        "name": "Sensor 0",
+        "pin": "7",
+        "intype": "down",
+        "debounce": "25",
+        "read": true,
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "a862943babe95602"
+            ]
+        ]
+    },
+    {
+        "id": "d4dbaa0946f2f7b6",
+        "type": "rpi-gpio in",
+        "z": "00c2a50688de2b17",
+        "name": "Sensor 1",
+        "pin": "11",
+        "intype": "down",
+        "debounce": "25",
+        "read": true,
+        "x": 80,
+        "y": 220,
+        "wires": [
+            [
+                "a862943babe95602"
+            ]
+        ]
+    },
+    {
+        "id": "4473ca5ea6c6ebc6",
+        "type": "rpi-gpio in",
+        "z": "00c2a50688de2b17",
+        "name": "Sensor 3",
+        "pin": "15",
+        "intype": "down",
+        "debounce": "25",
+        "read": true,
+        "x": 80,
+        "y": 340,
+        "wires": [
+            [
+                "a862943babe95602"
+            ]
+        ]
+    },
+    {
+        "id": "a2e6ec6e5a906f3d",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "54c9a2ce6ee3b8bb",
+        "x": 850,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "8d3d36cc6b1c2b49",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0957617de82d36a4",
+        "x": 850,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "0ad60d2127a339e6",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Update Sensor Readings",
+        "func": "global.set(`sensor_${msg.topic}_readings`, msg.payload);\nmsg.payload = {\"isBusy\": Boolean(msg.payload)};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "944062995971ba2a"
+            ]
+        ]
+    },
+    {
+        "id": "255b873e5a89f652",
+        "type": "switch",
+        "z": "00c2a50688de2b17",
+        "name": "Is Mode Automatic",
+        "property": "#:(file)::mode",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "automatic",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 320,
+        "wires": [
+            [
+                "5b6943f40173ea6f"
+            ]
+        ]
+    },
+    {
+        "id": "0dd835e5561823d3",
+        "type": "link out",
+        "z": "00c2a50688de2b17",
+        "name": "From \"Act on Readings Change\" 1",
+        "mode": "link",
+        "links": [
+            "a58f1e53d99300d9"
+        ],
+        "x": 755,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "07153b0189dfbb10",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "Command to Lathe Module",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "0957617de82d36a4",
+        "x": 860,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b58a802c90ce1eaf",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "Command to Milling Module",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "54c9a2ce6ee3b8bb",
+        "x": 860,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "252bed54aa9f54ab",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "Command to Warehouse",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "62adae58e3352ad0",
+        "x": 850,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "eaa57d9a62f05718",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "New State to ThingsBoard",
+        "topic": "v1/devices/me/attributes",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "75574e83caa0b1c3",
+        "x": 850,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "597ff558176a58eb",
+        "type": "rpi-gpio in",
+        "z": "00c2a50688de2b17",
+        "name": "Sensor 2",
+        "pin": "13",
+        "intype": "down",
+        "debounce": "25",
+        "read": true,
+        "x": 80,
+        "y": 280,
+        "wires": [
+            [
+                "a862943babe95602"
+            ]
+        ]
+    },
+    {
+        "id": "85824811123308f9",
+        "type": "link out",
+        "z": "00c2a50688de2b17",
+        "name": "From \"Act on Readings Change\" 0",
+        "mode": "link",
+        "links": [
+            "f8cd0babd32d1a43"
+        ],
+        "x": 655,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "04360a310ab15597",
+        "type": "subflow:54ec1a0e90ce21bf",
+        "z": "00c2a50688de2b17",
+        "name": "Close Locks after Clearing Path",
+        "env": [],
+        "x": 490,
+        "y": 100,
+        "wires": [
+            [
+                "85824811123308f9"
+            ]
+        ]
+    },
+    {
+        "id": "c51340e968d5a5e4",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Pass Pallet / Start Processing",
+        "func": "var passCounter = global.get(\"pass_counter_0\", \"file\");\nvar workpieceQueue = global.get(\"workpiece_queue\", \"file\");\nif (workpieceQueue[passCounter].processingOrder === 1 &&\nworkpieceQueue[passCounter].lapsNumber === 0)\n{\n    msg.payload = \"pass pallet\";\n    return [msg, null];\n}\nelse \n{\n    msg.payload = {\"method\":\"start processing\", \n    \"params\": workpieceQueue[passCounter].productType};\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 400,
+        "wires": [
+            [
+                "0dd835e5561823d3"
+            ],
+            [
+                "07153b0189dfbb10"
+            ]
+        ]
+    },
+    {
+        "id": "1d75140089b41c71",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Pass Pallet / Start Processing",
+        "func": "var passCounter = global.get(\"pass_counter_1\", \"file\");\nvar workpieceQueue = global.get(\"workpiece_queue\", \"file\");\nif (workpieceQueue[passCounter].processingOrder === 1 &&\nworkpieceQueue[passCounter].lapsNumber === 1)\n{\n    msg.payload = \"pass pallet\";\n    return [msg, null];\n}\nelse \n{\n    msg.payload = {\"method\":\"start processing\", \n    \"params\": workpieceQueue[passCounter].productType};\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 460,
+        "wires": [
+            [
+                "0dd835e5561823d3"
+            ],
+            [
+                "b58a802c90ce1eaf"
+            ]
+        ]
+    },
+    {
+        "id": "960e682fd722a65d",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Wait for Pallet Passing / Take Pallet",
+        "func": "var passCounter = global.get(\"pass_counter_3\", \"file\");\nvar workpieceQueue = global.get(\"workpiece_queue\", \"file\");\nif (workpieceQueue[passCounter].processingOrder === 1 &&\nworkpieceQueue[passCounter].lapsNumber === 0)\n{\n    msg.payload = {\"method\":\"wait for pallet passing\",\n    \"params\": {}};\n    workpieceQueue[passCounter].lapsNumber = 1;\n}\nelse \n{\n    msg.payload = {\"method\":\"take from conveyor\",\n    \"params\": {}};\n    workpieceQueue.splice(passCounter, 1);\n    global.set(\"pass_counter_3\", passCounter-1, \"file\");\n}\nglobal.set(\"workpiece_queue\", workpieceQueue, \"file\");\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 580,
+        "wires": [
+            [
+                "252bed54aa9f54ab"
+            ]
+        ]
+    },
+    {
+        "id": "5b6943f40173ea6f",
+        "type": "subflow:af3625fa1441f2d4",
+        "z": "00c2a50688de2b17",
+        "name": "Is Pallet Detected",
+        "env": [],
+        "x": 170,
+        "y": 460,
+        "wires": [
+            [
+                "149caa1547e9da56"
+            ]
+        ]
+    },
+    {
+        "id": "a862943babe95602",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Get Sensor",
+        "func": "switch (msg.topic)\n{\n    case \"pi/7\":\n        msg.topic = 0;\n        break;\n    case \"pi/11\":\n        msg.topic = 1;\n        break;\n    case \"pi/13\":\n        msg.topic = 2;\n        break;\n    case \"pi/15\":\n        msg.topic = 3;\n        break;\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 240,
+        "wires": [
+            [
+                "0ad60d2127a339e6",
+                "5672d50ad8f31d00",
+                "255b873e5a89f652"
+            ]
+        ]
+    },
+    {
+        "id": "944062995971ba2a",
+        "type": "switch",
+        "z": "00c2a50688de2b17",
+        "name": "Identify Sensor",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 540,
+        "y": 260,
+        "wires": [
+            [
+                "8d3d36cc6b1c2b49"
+            ],
+            [
+                "a2e6ec6e5a906f3d"
+            ],
+            [
+                "eaa57d9a62f05718"
+            ],
+            [
+                "761ff9573df22565"
+            ]
+        ]
+    },
+    {
+        "id": "149caa1547e9da56",
+        "type": "switch",
+        "z": "00c2a50688de2b17",
+        "name": "Identify Sensor",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 180,
+        "y": 560,
+        "wires": [
+            [
+                "c51340e968d5a5e4"
+            ],
+            [
+                "1d75140089b41c71"
+            ],
+            [
+                "63906a8a4a395dcd"
+            ],
+            [
+                "960e682fd722a65d"
+            ]
+        ]
+    },
+    {
+        "id": "5672d50ad8f31d00",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Is Command \"Move Pallet\" Executed",
+        "func": "if (global.get(\"is_move_pallet_executed\"))\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 40,
+        "wires": [
+            [
+                "04360a310ab15597"
+            ]
+        ]
+    },
+    {
+        "id": "63906a8a4a395dcd",
+        "type": "function",
+        "z": "00c2a50688de2b17",
+        "name": "Pass Pallet / Start Control",
+        "func": "var passCounter = global.get(\"pass_counter_2\", \"file\");\nvar workpieceQueue = global.get(\"workpiece_queue\", \"file\");\nif (workpieceQueue[passCounter].processingOrder === 1 &&\nworkpieceQueue[passCounter].lapsNumber === 0)\n{\n    msg.payload = \"pass pallet\";\n    return [msg, null];\n}\nelse \n{\n    msg.payload = {\"method\":\"start control\", \n    \"params\": workpieceQueue[passCounter].productType};\n    return [null, msg];\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 520,
+        "wires": [
+            [
+                "0dd835e5561823d3"
+            ],
+            [
+                "7e15559efef29889"
+            ]
+        ]
+    },
+    {
+        "id": "7e15559efef29889",
+        "type": "mqtt out",
+        "z": "00c2a50688de2b17",
+        "name": "Command to Control Module",
+        "topic": "v1/devices/me/rpc/request/1",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "75574e83caa0b1c3",
+        "x": 860,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "62adae58e3352ad0",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 3\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "54c9a2ce6ee3b8bb",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 1\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0957617de82d36a4",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 0\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "75574e83caa0b1c3",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lock 2\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

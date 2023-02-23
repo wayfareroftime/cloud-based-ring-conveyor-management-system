@@ -1,0 +1,330 @@
+[
+    {
+        "id": "cd013789115c27dc",
+        "type": "tab",
+        "label": "Update Devices State",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f809fc8776b38f48",
+        "type": "mqtt in",
+        "z": "cd013789115c27dc",
+        "name": "Lathe Module State",
+        "topic": "v1/devices/me/attributes/response/+",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "5523fb5174c55576",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "6d5702efa2ac473a"
+            ]
+        ]
+    },
+    {
+        "id": "db34bf274561cbe5",
+        "type": "mqtt in",
+        "z": "cd013789115c27dc",
+        "name": "Milling Module State",
+        "topic": "v1/devices/me/attributes/response/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "143cd6870fbb3152",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "2b63e063b52577b2"
+            ]
+        ]
+    },
+    {
+        "id": "9154ca35a9d485cb",
+        "type": "mqtt in",
+        "z": "cd013789115c27dc",
+        "name": "Control Module State",
+        "topic": "v1/devices/me/attributes/response/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "a5cbe5a125a610b6",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 400,
+        "wires": [
+            [
+                "f7db7dbb93d5de99"
+            ]
+        ]
+    },
+    {
+        "id": "cb02dec1f13f31bb",
+        "type": "mqtt in",
+        "z": "cd013789115c27dc",
+        "name": "Warehouse State ",
+        "topic": "v1/devices/me/attributes/response/+",
+        "qos": "1",
+        "datatype": "auto",
+        "broker": "7a78f3220c8b25fa",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 540,
+        "wires": [
+            [
+                "8967067a598a4bd2"
+            ]
+        ]
+    },
+    {
+        "id": "4d98c405dfdfdb78",
+        "type": "function",
+        "z": "cd013789115c27dc",
+        "name": "Save Lathe Module State",
+        "func": "var state = msg.payload.client.isBusy;\nglobal.set(\"is_lathe_module_busy\", state);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0aa8b34f30e88df2",
+        "type": "function",
+        "z": "cd013789115c27dc",
+        "name": "Save Milling Module State",
+        "func": "var state = msg.payload.client.isBusy;\nglobal.set(\"is_milling_module_busy\", state);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5f3cf8ef1d048a1b",
+        "type": "function",
+        "z": "cd013789115c27dc",
+        "name": "Save Control Module State",
+        "func": "var state = msg.payload.client.isBusy;\nglobal.set(\"is_control_module_busy\", state);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6a1ffc53277b2058",
+        "type": "function",
+        "z": "cd013789115c27dc",
+        "name": "Save Warehouse State",
+        "func": "var state = msg.payload.client.isBusy;\nglobal.set(\"is_warehouse_busy\", state);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6d5702efa2ac473a",
+        "type": "json",
+        "z": "cd013789115c27dc",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "4d98c405dfdfdb78"
+            ]
+        ]
+    },
+    {
+        "id": "2b63e063b52577b2",
+        "type": "json",
+        "z": "cd013789115c27dc",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 460,
+        "y": 260,
+        "wires": [
+            [
+                "0aa8b34f30e88df2"
+            ]
+        ]
+    },
+    {
+        "id": "f7db7dbb93d5de99",
+        "type": "json",
+        "z": "cd013789115c27dc",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 460,
+        "y": 400,
+        "wires": [
+            [
+                "5f3cf8ef1d048a1b"
+            ]
+        ]
+    },
+    {
+        "id": "8967067a598a4bd2",
+        "type": "json",
+        "z": "cd013789115c27dc",
+        "name": "JSON to Object",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 460,
+        "y": 540,
+        "wires": [
+            [
+                "6a1ffc53277b2058"
+            ]
+        ]
+    },
+    {
+        "id": "5523fb5174c55576",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Lathe Module\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "143cd6870fbb3152",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Milling Module\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "a5cbe5a125a610b6",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Control Module\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "7a78f3220c8b25fa",
+        "type": "mqtt-broker",
+        "name": "ThingsBoard Device \"Warehouse\"",
+        "broker": "45.8.230.87",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    }
+]

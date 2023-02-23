@@ -1,0 +1,254 @@
+{
+  "ruleChain": {
+    "additionalInfo": {
+      "description": ""
+    },
+    "name": "Order Handler",
+    "type": "CORE",
+    "firstRuleNodeId": null,
+    "root": false,
+    "debugMode": false,
+    "configuration": null
+  },
+  "metadata": {
+    "firstNodeIndex": 7,
+    "nodes": [
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 440,
+          "layoutY": 250
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect To Denford",
+        "debugMode": true,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "FROM",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Storage Module",
+                "entityTypes": [
+                  "ASSET"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 814,
+          "layoutY": 281
+        },
+        "type": "org.thingsboard.rule.engine.flow.TbRuleChainOutputNode",
+        "name": "Success",
+        "debugMode": false,
+        "configuration": {
+          "version": 0
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 286,
+          "layoutY": 151
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsSwitchNode",
+        "name": "Check Workpieces Amount",
+        "debugMode": false,
+        "configuration": {
+          "jsScript": "if (metadata.cs_workpiecesAmount >= msg.lastAmount)\nreturn ['Enough'];\nelse\nreturn ['Not Enough'];"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 289,
+          "layoutY": 404
+        },
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Get Workpieces Amount",
+        "debugMode": false,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [
+            "workpiecesAmount"
+          ],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 566,
+          "layoutY": 376
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect to Conveyor",
+        "debugMode": true,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "TO",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Transport Module",
+                "entityTypes": [
+                  "DEVICE"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 648,
+          "layoutY": 150
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Prepare Products Data",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var newMsg = {\"method\": \"place on conveyor\", \"params\": msg.lastAmount};\nvar newMsgType = \"RPC_CALL_FROM_SERVER_TO_DEVICE\";\nreturn {msg: newMsg, metadata: metadata, msgType: newMsgType};"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 62,
+          "layoutY": 403
+        },
+        "type": "org.thingsboard.rule.engine.filter.TbJsFilterNode",
+        "name": "Check if Automatic",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "return metadata.ss_operatingMode === \"automatic\";"
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 58,
+          "layoutY": 279
+        },
+        "type": "org.thingsboard.rule.engine.metadata.TbGetAttributesNode",
+        "name": "Get Operating Mode",
+        "debugMode": true,
+        "configuration": {
+          "tellFailureIfAbsent": true,
+          "clientAttributeNames": [],
+          "sharedAttributeNames": [],
+          "serverAttributeNames": [
+            "operatingMode"
+          ],
+          "latestTsKeyNames": [],
+          "getLatestValueWithTs": false
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 191,
+          "layoutY": 553
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbChangeOriginatorNode",
+        "name": "Redirect to Warehouse",
+        "debugMode": false,
+        "configuration": {
+          "originatorSource": "RELATED",
+          "relationsQuery": {
+            "fetchLastLevelOnly": false,
+            "direction": "TO",
+            "maxLevel": 1,
+            "filters": [
+              {
+                "relationType": "Is Storage Module",
+                "entityTypes": [
+                  "DEVICE"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      {
+        "additionalInfo": {
+          "description": "",
+          "layoutX": 685,
+          "layoutY": 506
+        },
+        "type": "org.thingsboard.rule.engine.transform.TbTransformMsgNode",
+        "name": "Prepare Products Data",
+        "debugMode": true,
+        "configuration": {
+          "jsScript": "var processingOrder;\nvar lapsNumber = 0;\nvar lastOrder = [];\nswitch (msg.lastProductType) {\ncase 'Ладья':\n    msg.lastProductType = \"Rook\";\n    processingOrder = 0;\n    break;\ncase 'Пешка':\n    msg.lastProductType = \"Pawn\";\n    processingOrder = 0;\n    break;\ncase 'Ферзь':\n    msg.lastProductType = \"Queen\";\n    processingOrder = 0;\n    break;\ncase 'Конь':\n    msg.lastProductType = \"Knight\";\n    processingOrder = 1;\n    break;\ncase 'Слон':\n    msg.lastProductType = \"Bishop\";\n    processingOrder = 1;\n    break;\ncase 'Король':\n    msg.lastProductType = \"King\";\n    processingOrder = 1;\n    break;\n}\nfor (var i = 0; i < msg.lastAmount; i++) {\n    lastOrder.push({\"productType\": msg.lastProductType, \n    \"processingOrder\": processingOrder, \"lapsNumber\": lapsNumber});\n}\nvar newMsg = {\"method\": \"handle order\", \"params\": lastOrder};\nvar newMsgType = \"RPC_CALL_FROM_SERVER_TO_DEVICE\";\nreturn {msg: newMsg, metadata: metadata, msgType: newMsgType};"
+        }
+      }
+    ],
+    "connections": [
+      {
+        "fromIndex": 0,
+        "toIndex": 4,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 5,
+        "type": "Enough"
+      },
+      {
+        "fromIndex": 2,
+        "toIndex": 0,
+        "type": "Enough"
+      },
+      {
+        "fromIndex": 3,
+        "toIndex": 2,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 4,
+        "toIndex": 9,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 5,
+        "toIndex": 1,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 6,
+        "toIndex": 8,
+        "type": "True"
+      },
+      {
+        "fromIndex": 7,
+        "toIndex": 6,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 8,
+        "toIndex": 3,
+        "type": "Success"
+      },
+      {
+        "fromIndex": 9,
+        "toIndex": 1,
+        "type": "Success"
+      }
+    ],
+    "ruleChainConnections": null
+  }
+}
